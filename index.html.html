@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moé Moves — Book Your Move | Ilorin</title>
+<meta name="description" content="Book a professional relocation with Moé Moves in Ilorin, Kwara State. Packing, moving, cleaning, home setup — all in one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARIABLES ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F2645;--navy2:#1B3A5C;--navy3:#243d5e;
+  --orange:#E8600A;--orange2:#FF7520;
+  --gold:#C49A2A;--gold2:#F0C040;
+  --white:#FFFFFF;--cream:#FFF8F0;
+  --grey:#F5F5F7;--grey2:#EBEBEF;
+  --text:#1A1A2E;--muted:#7A7A90;--border:#E0E0EC;
+  --green:#1A6B3C;
+  --shadow:0 20px 60px rgba(0,0,0,0.22);
+  --radius:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;padding-bottom:60px}
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+.site-header{
+  position:sticky;top:0;z-index:200;
+  background:var(--navy);
+  border-bottom:3px solid var(--orange);
+  padding:13px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:flex;flex-direction:column;line-height:.95}
+.logo-moe{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;color:var(--white);letter-spacing:3px}
+.logo-moves{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--orange);letter-spacing:3px}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.tagline{font-size:10px;color:var(--gold);font-style:italic;letter-spacing:.8px}
+.location-tag{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1.5px;text-transform:uppercase}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1a3050 100%);
+  padding:44px 24px 32px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,96,10,.14) 0%,transparent 70%);
+  top:-250px;right:-200px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,154,42,.1) 0%,transparent 70%);
+  bottom:-180px;left:-120px;pointer-events:none;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,6vw,46px);
+  font-weight:900;color:var(--white);
+  margin-bottom:10px;position:relative;z-index:1;
+  line-height:1.15;
+}
+.hero h1 span{color:var(--orange)}
+.hero p{
+  font-size:13px;color:rgba(255,255,255,.62);
+  max-width:440px;margin:0 auto 24px;
+  line-height:1.7;position:relative;z-index:1;
+}
+.hero-badges{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-bottom:24px;position:relative;z-index:1;
+}
+.badge{
+  padding:5px 13px;border-radius:20px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:10px;font-weight:600;color:rgba(255,255,255,.7);
+  letter-spacing:.5px;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────── */
+.progress{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;position:relative;z-index:1;margin-bottom:6px;
+}
+.prog-step{display:flex;flex-direction:column;align-items:center;gap:5px}
+.prog-circle{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+  transition:all .3s ease;
+  border:2px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.3);
+  background:rgba(255,255,255,.06);
+}
+.prog-circle.active{background:var(--orange);border-color:var(--orange);color:var(--white);box-shadow:0 0 16px rgba(232,96,10,.5)}
+.prog-circle.done{background:var(--gold);border-color:var(--gold);color:var(--white)}
+.prog-label{font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .3s}
+.prog-label.active{color:var(--orange)}
+.prog-label.done{color:var(--gold)}
+.prog-line{width:36px;height:2px;background:rgba(255,255,255,.1);margin-bottom:20px;transition:background .3s}
+.prog-line.done{background:var(--gold)}
+
+/* ── CARD ────────────────────────────────────────────────────── */
+.form-card{
+  background:var(--white);
+  border-radius:20px;
+  width:calc(100% - 32px);max-width:600px;
+  margin:-18px auto 0;
+  padding:30px 24px 26px;
+  box-shadow:var(--shadow);
+  position:relative;z-index:10;
+}
+
+/* ── PANELS ──────────────────────────────────────────────────── */
+.panel{display:none}
+.panel.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.panel-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.panel-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+
+/* ── FORM ELEMENTS ───────────────────────────────────────────── */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--navy2);letter-spacing:.9px;text-transform:uppercase;margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);
+  background:var(--grey);outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--orange);background:var(--white);
+  box-shadow:0 0 0 3px rgba(232,96,10,.1);
+}
+.field textarea{min-height:72px;resize:vertical}
+.field select{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23E8600A' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;
+}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.req{color:var(--orange)}
+.divider{height:1px;background:var(--grey2);margin:16px 0}
+
+/* ── PILLS ───────────────────────────────────────────────────── */
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{
+  padding:6px 14px;border-radius:30px;
+  border:1.5px solid var(--border);
+  font-size:11px;font-weight:600;cursor:pointer;
+  background:var(--grey);color:#555;
+  transition:all .18s;user-select:none;
+}
+.pill:hover{border-color:var(--orange);color:var(--orange)}
+.pill.on{background:var(--navy);border-color:var(--navy);color:var(--white)}
+
+/* ── CHECKBOXES ──────────────────────────────────────────────── */
+.chk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.chk-item{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 12px;border-radius:10px;cursor:pointer;
+  border:1.5px solid var(--border);background:var(--grey);
+  transition:all .18s;user-select:none;
+}
+.chk-item:hover{border-color:var(--orange)}
+.chk-item.on{border-color:var(--orange);background:rgba(232,96,10,.05)}
+.chk-box{
+  width:17px;height:17px;border-radius:4px;flex-shrink:0;
+  border:2px solid #ccc;background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--white);font-weight:700;
+  transition:all .18s;
+}
+.chk-item.on .chk-box{background:var(--orange);border-color:var(--orange)}
+.chk-label{font-size:12px;font-weight:500;color:var(--text)}
+
+/* ── PACKAGES ────────────────────────────────────────────────── */
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.pkg-card{
+  border:2px solid var(--border);border-radius:13px;
+  padding:14px 12px;cursor:pointer;position:relative;
+  transition:all .22s;background:var(--white);
+}
+.pkg-card:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,96,10,.12)}
+.pkg-card.on{border-color:var(--orange);background:rgba(232,96,10,.03)}
+.pkg-tick{
+  position:absolute;top:9px;right:11px;
+  color:var(--orange);font-size:14px;font-weight:700;
+  display:none;
+}
+.pkg-card.on .pkg-tick{display:block}
+.pkg-name{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.pkg-price{font-size:12px;font-weight:700;margin-bottom:6px}
+.pkg-items{font-size:10px;color:var(--muted);line-height:1.8}
+
+/* ── PRICE LIST ACCORDION ────────────────────────────────────── */
+.accordion{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.acc-header{
+  padding:12px 16px;background:var(--navy);
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;user-select:none;
+}
+.acc-title{font-size:12px;font-weight:700;color:var(--white);letter-spacing:.5px}
+.acc-chevron{color:var(--gold);font-size:11px;transition:transform .25s}
+.acc-chevron.open{transform:rotate(180deg)}
+.acc-body{padding:4px 16px 14px;display:none}
+.acc-body.open{display:block;animation:fadeUp .2s ease}
+.pl-cat{font-size:10px;font-weight:700;color:var(--orange);margin:12px 0 5px;text-transform:uppercase;letter-spacing:.8px}
+.pl-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid var(--grey2)}
+.pl-row:last-child{border-bottom:none}
+.pl-k{color:#666}.pl-v{font-weight:600;color:var(--navy)}
+.pl-note{font-size:10px;color:var(--muted);font-style:italic;margin-top:10px;line-height:1.5}
+
+/* ── LIVE QUOTE BOX ──────────────────────────────────────────── */
+.quote-box{
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  border-radius:13px;padding:16px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin:14px 0;animation:fadeUp .3s ease;
+}
+.quote-label{font-size:9px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px}
+.quote-amount{font-size:24px;font-weight:900;color:var(--orange);letter-spacing:-.5px}
+.quote-note{font-size:9px;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.4}
+.quote-icon{font-size:36px;opacity:.8}
+
+/* ── SUMMARY ─────────────────────────────────────────────────── */
+.summ-block{background:var(--grey);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.summ-title{font-size:9px;font-weight:700;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.summ-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid var(--grey2)}
+.summ-row:last-child{border-bottom:none}
+.summ-k{color:var(--muted)}.summ-v{font-weight:600;color:var(--navy);text-align:right;max-width:62%;word-break:break-word}
+
+/* ── NOTICE ──────────────────────────────────────────────────── */
+.notice{
+  background:rgba(196,154,42,.07);
+  border:1px solid rgba(196,154,42,.28);
+  border-radius:10px;padding:10px 14px;
+  font-size:11px;color:#7A6010;line-height:1.7;margin-bottom:14px;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn-row{display:flex;gap:10px;margin-top:22px}
+.btn-back{
+  flex:1;padding:12px;
+  border:1.5px solid var(--border);border-radius:12px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+  color:var(--muted);background:transparent;cursor:pointer;
+  transition:all .18s;
+}
+.btn-back:hover{border-color:var(--navy2);color:var(--navy)}
+.btn-next{
+  flex:2;padding:12px;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  border:none;border-radius:12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;
+  color:var(--white);cursor:pointer;
+  box-shadow:0 5px 18px rgba(232,96,10,.32);
+  transition:all .2s;letter-spacing:.2px;
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 7px 22px rgba(232,96,10,.42)}
+.btn-next:active{transform:translateY(0)}
+.btn-submit{
+  flex:2;padding:12px;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  border:none;border-radius:12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:800;
+  color:var(--white);cursor:pointer;
+  box-shadow:0 5px 18px rgba(15,38,69,.3);
+  transition:all .2s;
+}
+
+/* ── SUCCESS ─────────────────────────────────────────────────── */
+.success{display:none;text-align:center;padding:14px 0}
+.success-icon{
+  width:76px;height:76px;border-radius:50%;
+  background:linear-gradient(135deg,var(--orange),var(--gold));
+  margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;
+  box-shadow:0 10px 28px rgba(232,96,10,.32);
+}
+.success h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px}
+.success p{font-size:12px;color:#666;line-height:1.8;max-width:400px;margin:0 auto 20px}
+.action-btns{display:flex;flex-direction:column;align-items:center;gap:10px}
+.btn-cal{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:var(--white);
+  padding:11px 22px;border-radius:11px;
+  font-size:12px;font-weight:700;text-decoration:none;
+  box-shadow:0 4px 14px rgba(15,38,69,.25);
+  transition:transform .2s;
+}
+.btn-cal:hover{transform:translateY(-1px)}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#25D366;color:var(--white);
+  padding:11px 22px;border-radius:11px;
+  font-size:12px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 14px rgba(37,211,102,.28);
+  text-decoration:none;transition:transform .2s;
+}
+.btn-wa:hover{transform:translateY(-1px)}
+.success-footer{font-size:10px;color:#bbb;margin-top:16px}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.site-footer{
+  text-align:center;padding:24px 16px 0;
+  font-size:11px;color:rgba(255,255,255,.3);
+  line-height:1.8;
+}
+.site-footer a{color:var(--gold);text-decoration:none}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media(max-width:480px){
+  .form-card{padding:22px 16px 20px;border-radius:16px;width:calc(100% - 24px)}
+  .two-col{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  .chk-grid{grid-template-columns:1fr}
+  .prog-line{width:22px}
+  .hero{padding:32px 16px 26px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="logo">
+    <span class="logo-moe">MOÉ</span>
+    <span class="logo-moves">MOVES</span>
+  </div>
+  <div class="header-right">
+    <span class="tagline">"Your Move, Made Easy."</span>
+    <span class="location-tag">Ilorin · Kwara State · 2026</span>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <h1>Book Your <span>Move</span></h1>
+  <p>Professional, stress-free relocation in Ilorin and nearby towns. Fill in the form and we'll reach out within 2 hours with your free written quote.</p>
+  <div class="hero-badges">
+    <span class="badge">📦 Packing</span>
+    <span class="badge">🚚 Moving</span>
+    <span class="badge">🧹 Cleaning</span>
+    <span class="badge">🏠 Home Setup</span>
+    <span class="badge">🔧 Artisan Services</span>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress" id="progressBar">
+    <div class="prog-step">
+      <div class="prog-circle active" id="pc0">1</div>
+      <div class="prog-label active" id="pl0">You</div>
+    </div>
+    <div class="prog-line" id="ln0"></div>
+    <div class="prog-step">
+      <div class="prog-circle" id="pc1">2</div>
+      <div class="prog-label" id="pl1">Move</div>
+    </div>
+    <div class="prog-line" id="ln1"></div>
+    <div class="prog-step">
+      <div class="prog-circle" id="pc2">3</div>
+      <div class="prog-label" id="pl2">Services</div>
+    </div>
+    <div class="prog-line" id="ln2"></div>
+    <div class="prog-step">
+      <div class="prog-circle" id="pc3">4</div>
+      <div class="prog-label" id="pl3">Package</div>
+    </div>
+    <div class="prog-line" id="ln3"></div>
+    <div class="prog-step">
+      <div class="prog-circle" id="pc4">5</div>
+      <div class="prog-label" id="pl4">Confirm</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORM CARD ═════════════════════════════════════════════ -->
+<div class="form-card">
+
+  <!-- ── NETLIFY FORM (hidden, captures all data) ── -->
+  <!-- This invisible form registers the form with Netlify -->
+  <form name="moemoves-booking" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="full-name">
+    <input type="tel" name="phone">
+    <input type="tel" name="whatsapp">
+    <input type="email" name="email">
+    <input type="text" name="source">
+    <input type="text" name="move-type">
+    <input type="text" name="home-size">
+    <input type="text" name="move-from">
+    <input type="text" name="move-to">
+    <input type="text" name="distance">
+    <input type="date" name="move-date">
+    <input type="text" name="move-time">
+    <input type="text" name="floor-level">
+    <input type="text" name="services">
+    <input type="text" name="heavy-items">
+    <input type="text" name="fragile-items">
+    <input type="text" name="package">
+    <input type="text" name="budget">
+    <input type="text" name="estimated-quote">
+    <textarea name="notes"></textarea>
+  </form>
+
+  <!-- ── STEP 0: YOUR DETAILS ── -->
+  <div class="panel active" id="p0">
+    <div class="panel-title">Let's start with you</div>
+    <div class="panel-sub">We'll use these details to contact you with your free quote within 2 hours.</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Full Name <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="e.g. Amina Yusuf" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="e.g. 0803 000 0000" autocomplete="tel">
+      </div>
+    </div>
+    <div class="field">
+      <label>WhatsApp Number <small style="font-weight:400;color:var(--muted)">(if different)</small></label>
+      <input type="tel" id="whatsapp" placeholder="Leave blank if same as phone">
+    </div>
+    <div class="field">
+      <label>Email Address <small style="font-weight:400;color:var(--muted)">(optional)</small></label>
+      <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
+    </div>
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <div class="pills" id="g-source">
+        <div class="pill" data-val="Instagram" onclick="pickPill('g-source',this)">Instagram</div>
+        <div class="pill" data-val="Facebook" onclick="pickPill('g-source',this)">Facebook</div>
+        <div class="pill" data-val="WhatsApp" onclick="pickPill('g-source',this)">WhatsApp</div>
+        <div class="pill" data-val="Friend/Referral" onclick="pickPill('g-source',this)">Friend / Referral</div>
+        <div class="pill" data-val="Estate Agent" onclick="pickPill('g-source',this)">Estate Agent</div>
+        <div class="pill" data-val="Google" onclick="pickPill('g-source',this)">Google</div>
+        <div class="pill" data-val="Other" onclick="pickPill('g-source',this)">Other</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-next" onclick="goTo(1)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: MOVE DETAILS ── -->
+  <div class="panel" id="p1">
+    <div class="panel-title">Tell us about the move</div>
+    <div class="panel-sub">These details help us calculate your accurate estimate.</div>
+    <div class="field">
+      <label>Type of Move <span class="req">*</span></label>
+      <div class="pills" id="g-movetype">
+        <div class="pill" data-val="Home / Family" onclick="pickPill('g-movetype',this)">🏠 Home / Family</div>
+        <div class="pill" data-val="Single Room" onclick="pickPill('g-movetype',this)">🛏 Single Room</div>
+        <div class="pill" data-val="Office / Business" onclick="pickPill('g-movetype',this)">🏢 Office / Business</div>
+        <div class="pill" data-val="Student" onclick="pickPill('g-movetype',this)">🎓 Student</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Size of Current Home <span class="req">*</span></label>
+      <select id="homesize">
+        <option value="">Select home size...</option>
+        <option>Studio / Self-Contain</option>
+        <option>1 Bedroom</option>
+        <option>2 Bedrooms</option>
+        <option>3 Bedrooms</option>
+        <option>4 Bedrooms</option>
+        <option>5 Bedrooms+</option>
+        <option>Office Space</option>
+      </select>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Moving FROM <span class="req">*</span></label>
+        <input type="text" id="from" placeholder="Estate / area in Ilorin">
+      </div>
+      <div class="field">
+        <label>Moving TO <span class="req">*</span></label>
+        <input type="text" id="to" placeholder="Estate / area / nearby town">
+      </div>
+    </div>
+    <div class="field">
+      <label>Move Distance <span class="req">*</span></label>
+      <div class="pills" id="g-dist">
+        <div class="pill" data-val="Same estate/area" onclick="pickPill('g-dist',this)">Same estate / area</div>
+        <div class="pill" data-val="Across Ilorin" onclick="pickPill('g-dist',this)">Across Ilorin</div>
+        <div class="pill" data-val="Nearby town" onclick="pickPill('g-dist',this)">Nearby town</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Preferred Move Date <span class="req">*</span></label>
+        <input type="date" id="movedate" min="">
+      </div>
+      <div class="field">
+        <label>Preferred Time</label>
+        <select id="movetime">
+          <option value="">Select time...</option>
+          <option>Early Morning (6am – 9am)</option>
+          <option>Morning (9am – 12pm)</option>
+          <option>Afternoon (12pm – 4pm)</option>
+          <option>Flexible — any time</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Floor Level at Current Address</label>
+      <div class="pills" id="g-floor">
+        <div class="pill" data-val="Ground floor" onclick="pickPill('g-floor',this)">Ground floor</div>
+        <div class="pill" data-val="1st floor (stairs)" onclick="pickPill('g-floor',this)">1st floor (stairs)</div>
+        <div class="pill" data-val="2nd floor+" onclick="pickPill('g-floor',this)">2nd floor+</div>
+        <div class="pill" data-val="Has lift" onclick="pickPill('g-floor',this)">Has lift</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(0)">← Back</button>
+      <button class="btn-next" onclick="goTo(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: SERVICES ── -->
+  <div class="panel" id="p2">
+    <div class="panel-title">What do you need?</div>
+    <div class="panel-sub">Tick everything that applies — your quote updates automatically.</div>
+    <div class="field">
+      <label>Services Required</label>
+      <div class="chk-grid" id="g-services">
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Packing"><div class="chk-box"></div><span class="chk-label">📦 Packing</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Unpacking"><div class="chk-box"></div><span class="chk-label">📂 Unpacking</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Loading"><div class="chk-box"></div><span class="chk-label">💪 Loading</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Offloading"><div class="chk-box"></div><span class="chk-label">🏋️ Offloading</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Transportation"><div class="chk-box"></div><span class="chk-label">🚚 Transportation</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Clean old home"><div class="chk-box"></div><span class="chk-label">🧹 Clean old home</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Clean new home"><div class="chk-box"></div><span class="chk-label">✨ Clean new home</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Home Setup"><div class="chk-box"></div><span class="chk-label">🏠 Home Setup</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Painting"><div class="chk-box"></div><span class="chk-label">🎨 Painting</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Plumbing"><div class="chk-box"></div><span class="chk-label">🔧 Plumbing</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Electrical"><div class="chk-box"></div><span class="chk-label">⚡ Electrical</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Furniture Assembly"><div class="chk-box"></div><span class="chk-label">🪑 Furniture Assembly</span></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="field">
+      <label>Large / heavy items you have <small style="font-weight:400;color:var(--muted)">(helps us plan)</small></label>
+      <div class="chk-grid" id="g-heavy">
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Large fridge"><div class="chk-box"></div><span class="chk-label">🧊 Large fridge</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Washing machine"><div class="chk-box"></div><span class="chk-label">🫧 Washing machine</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Large wardrobe"><div class="chk-box"></div><span class="chk-label">🚪 Large wardrobe</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Generator"><div class="chk-box"></div><span class="chk-label">⚙️ Generator</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Large sofa"><div class="chk-box"></div><span class="chk-label">🛋️ Large sofa</span></div>
+        <div class="chk-item" onclick="toggleChk(this)" data-val="Piano / Keyboard"><div class="chk-box"></div><span class="chk-label">🎹 Piano / Keyboard</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Fragile or special items?</label>
+      <textarea id="fragile" placeholder="e.g. glassware, artwork, electronics, antiques..."></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+      <button class="btn-next" onclick="goTo(3)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: PACKAGE + PRICE LIST + QUOTE ── -->
+  <div class="panel" id="p3">
+    <div class="panel-title">Choose your package</div>
+    <div class="panel-sub">Select the best fit — your estimated cost shows automatically below.</div>
+
+    <!-- COLLAPSIBLE PRICE LIST -->
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc()">
+        <span class="acc-title">📋 View Full Price List</span>
+        <span class="acc-chevron" id="chevron">▼</span>
+      </div>
+      <div class="acc-body" id="accBody">
+        <div class="pl-cat">📦 Packing</div>
+        <div class="pl-row"><span class="pl-k">Basic packing assist</span><span class="pl-v">₦5,000 – ₦10,000</span></div>
+        <div class="pl-row"><span class="pl-k">Standard packing (1–2 bed)</span><span class="pl-v">₦15,000 – ₦25,000</span></div>
+        <div class="pl-row"><span class="pl-k">Standard packing (3 bed)</span><span class="pl-v">₦30,000 – ₦45,000</span></div>
+        <div class="pl-row"><span class="pl-k">Premium packing (4+ bed)</span><span class="pl-v">₦50,000 – ₦80,000</span></div>
+        <div class="pl-row"><span class="pl-k">Fragile/special items (add-on)</span><span class="pl-v">₦5,000 – ₦15,000</span></div>
+        <div class="pl-row"><span class="pl-k">Unpacking at new home</span><span class="pl-v">₦8,000 – ₦20,000</span></div>
+        <div class="pl-cat">💪 Loading & Offloading</div>
+        <div class="pl-row"><span class="pl-k">Loading only</span><span class="pl-v">₦8,000 – ₦15,000</span></div>
+        <div class="pl-row"><span class="pl-k">Offloading only</span><span class="pl-v">₦8,000 – ₦15,000</span></div>
+        <div class="pl-row"><span class="pl-k">Loading + offloading</span><span class="pl-v">₦15,000 – ₦25,000</span></div>
+        <div class="pl-row"><span class="pl-k">Heavy furniture (per item)</span><span class="pl-v">₦2,000 – ₦5,000</span></div>
+        <div class="pl-row"><span class="pl-k">Stairs surcharge (per floor)</span><span class="pl-v">₦3,000 – ₦5,000</span></div>
+        <div class="pl-cat">🚚 Transportation</div>
+        <div class="pl-row"><span class="pl-k">Within same estate/area</span><span class="pl-v">₦10,000 – ₦20,000</span></div>
+        <div class="pl-row"><span class="pl-k">Across Ilorin</span><span class="pl-v">₦20,000 – ₦40,000</span></div>
+        <div class="pl-row"><span class="pl-k">Nearby towns</span><span class="pl-v">₦40,000 – ₦80,000</span></div>
+        <div class="pl-cat">🧹 Cleaning</div>
+        <div class="pl-row"><span class="pl-k">Basic clean (old home)</span><span class="pl-v">₦8,000 – ₦15,000</span></div>
+        <div class="pl-row"><span class="pl-k">Deep clean (old home)</span><span class="pl-v">₦20,000 – ₦40,000</span></div>
+        <div class="pl-row"><span class="pl-k">New home pre-move-in clean</span><span class="pl-v">₦20,000 – ₦35,000</span></div>
+        <div class="pl-row"><span class="pl-k">2–3 bedroom deep clean</span><span class="pl-v">₦25,000 – ₦45,000</span></div>
+        <div class="pl-row"><span class="pl-k">4+ bedroom deep clean</span><span class="pl-v">₦50,000 – ₦90,000</span></div>
+        <div class="pl-cat">🏠 Home Setup</div>
+        <div class="pl-row"><span class="pl-k">Basic furniture arrangement</span><span class="pl-v">₦10,000 – ₦20,000</span></div>
+        <div class="pl-row"><span class="pl-k">Full home setup (1–2 bed)</span><span class="pl-v">₦20,000 – ₦35,000</span></div>
+        <div class="pl-row"><span class="pl-k">Full home setup (3+ bed)</span><span class="pl-v">₦40,000 – ₦70,000</span></div>
+        <div class="pl-cat">🔧 Artisan Services</div>
+        <div class="pl-row"><span class="pl-k">Painting (per room)</span><span class="pl-v">₦15,000 – ₦30,000</span></div>
+        <div class="pl-row"><span class="pl-k">Painting (full apartment)</span><span class="pl-v">₦40,000 – ₦90,000</span></div>
+        <div class="pl-row"><span class="pl-k">Plumbing (basic)</span><span class="pl-v">₦8,000 – ₦25,000</span></div>
+        <div class="pl-row"><span class="pl-k">Electrical work (basic)</span><span class="pl-v">₦8,000 – ₦25,000</span></div>
+        <div class="pl-row"><span class="pl-k">Furniture assembly (per piece)</span><span class="pl-v">₦5,000 – ₦15,000</span></div>
+        <div class="pl-row"><span class="pl-k">AC installation/removal</span><span class="pl-v">₦10,000 – ₦25,000</span></div>
+        <div class="pl-note">* All prices are estimates. Written quote provided after your free consultation.</div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="field">
+      <label>Select Package</label>
+      <div class="pkg-grid" id="g-pkg">
+        <div class="pkg-card" onclick="pickPkg(this,'Basic',[40000,70000])">
+          <div class="pkg-tick">✓</div>
+          <div class="pkg-name">BASIC</div>
+          <div class="pkg-price" style="color:#1B3A5C">₦40,000 – ₦70,000</div>
+          <div class="pkg-items">✓ Packing help<br>✓ Load & offload<br>✓ Transport (same area)<br><em>Best for: 1–2 bedroom</em></div>
+        </div>
+        <div class="pkg-card" onclick="pickPkg(this,'Standard',[80000,120000])">
+          <div class="pkg-tick">✓</div>
+          <div class="pkg-name">STANDARD</div>
+          <div class="pkg-price" style="color:#E8600A">₦80,000 – ₦120,000</div>
+          <div class="pkg-items">✓ Full packing + materials<br>✓ Transport<br>✓ Basic post-move clean<br><em>Best for: 3 bedroom</em></div>
+        </div>
+        <div class="pkg-card" onclick="pickPkg(this,'Premium',[140000,250000])">
+          <div class="pkg-tick">✓</div>
+          <div class="pkg-name">PREMIUM</div>
+          <div class="pkg-price" style="color:#C49A2A">₦140,000 – ₦250,000</div>
+          <div class="pkg-items">✓ Full packing<br>✓ Transport<br>✓ Deep clean both homes<br>✓ Full home setup<br><em>Best for: Full family move</em></div>
+        </div>
+        <div class="pkg-card" onclick="pickPkg(this,'Corporate',[150000,400000])">
+          <div class="pkg-tick">✓</div>
+          <div class="pkg-name">CORPORATE</div>
+          <div class="pkg-price" style="color:#2C5F2D">Custom Quote</div>
+          <div class="pkg-items">✓ Office packing & labels<br>✓ Safe transport<br>✓ Post-move office clean<br>✓ Setup coordination<br><em>Best for: Offices & businesses</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE QUOTE -->
+    <div class="quote-box" id="quoteBox" style="display:none">
+      <div>
+        <div class="quote-label">Your Estimated Quote</div>
+        <div class="quote-amount" id="quoteAmount">—</div>
+        <div class="quote-note">Based on your selections · Final price confirmed after consultation</div>
+      </div>
+      <div class="quote-icon">🧮</div>
+    </div>
+
+    <div class="field">
+      <label>Budget Range</label>
+      <div class="pills" id="g-budget">
+        <div class="pill" data-val="Below ₦40k" onclick="pickPill('g-budget',this)">Below ₦40k</div>
+        <div class="pill" data-val="₦40k – ₦80k" onclick="pickPill('g-budget',this)">₦40k – ₦80k</div>
+        <div class="pill" data-val="₦80k – ₦150k" onclick="pickPill('g-budget',this)">₦80k – ₦150k</div>
+        <div class="pill" data-val="₦150k – ₦250k" onclick="pickPill('g-budget',this)">₦150k – ₦250k</div>
+        <div class="pill" data-val="Above ₦250k" onclick="pickPill('g-budget',this)">Above ₦250k</div>
+        <div class="pill" data-val="Open / Advise me" onclick="pickPill('g-budget',this)">Open / Advise me</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Additional Notes</label>
+      <textarea id="notes" placeholder="Tight deadline, narrow access, special requests, anything else we should know..."></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-next" onclick="goTo(4)">Review Booking →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 4: CONFIRM ── -->
+  <div class="panel" id="p4">
+    <div class="panel-title">Review your booking</div>
+    <div class="panel-sub">Check everything before submitting your free consultation request.</div>
+    <div class="notice">📋 <strong>Please note:</strong> This is a booking <em>request</em>, not a confirmed booking. We will contact you within <strong>2 hours</strong> to confirm details and send your written quote.</div>
+
+    <div class="quote-box" id="quoteBox2" style="display:none">
+      <div>
+        <div class="quote-label">Estimated Cost</div>
+        <div class="quote-amount" id="quoteAmount2">—</div>
+        <div class="quote-note">Final price confirmed after consultation</div>
+      </div>
+      <div class="quote-icon">💰</div>
+    </div>
+
+    <div class="summ-block">
+      <div class="summ-title">Your Details</div>
+      <div class="summ-row"><span class="summ-k">Name</span><span class="summ-v" id="s-name">—</span></div>
+      <div class="summ-row"><span class="summ-k">Phone</span><span class="summ-v" id="s-phone">—</span></div>
+      <div class="summ-row"><span class="summ-k">WhatsApp</span><span class="summ-v" id="s-wa">—</span></div>
+      <div class="summ-row"><span class="summ-k">Heard from</span><span class="summ-v" id="s-source">—</span></div>
+    </div>
+    <div class="summ-block">
+      <div class="summ-title">Move Details</div>
+      <div class="summ-row"><span class="summ-k">Type</span><span class="summ-v" id="s-type">—</span></div>
+      <div class="summ-row"><span class="summ-k">Home size</span><span class="summ-v" id="s-size">—</span></div>
+      <div class="summ-row"><span class="summ-k">From</span><span class="summ-v" id="s-from">—</span></div>
+      <div class="summ-row"><span class="summ-k">To</span><span class="summ-v" id="s-to">—</span></div>
+      <div class="summ-row"><span class="summ-k">Distance</span><span class="summ-v" id="s-dist">—</span></div>
+      <div class="summ-row"><span class="summ-k">Date</span><span class="summ-v" id="s-date">—</span></div>
+      <div class="summ-row"><span class="summ-k">Time</span><span class="summ-v" id="s-time">—</span></div>
+    </div>
+    <div class="summ-block">
+      <div class="summ-title">Services & Package</div>
+      <div class="summ-row"><span class="summ-k">Services</span><span class="summ-v" id="s-svcs">—</span></div>
+      <div class="summ-row"><span class="summ-k">Heavy items</span><span class="summ-v" id="s-heavy">—</span></div>
+      <div class="summ-row"><span class="summ-k">Package</span><span class="summ-v" id="s-pkg">—</span></div>
+      <div class="summ-row"><span class="summ-k">Budget</span><span class="summ-v" id="s-budget">—</span></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-submit" onclick="submitForm()">Submit Booking Request ✓</button>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS ── -->
+  <div class="success" id="successPanel">
+    <div class="success-icon">🏠</div>
+    <h2>Booking Request Received!</h2>
+    <p>Thank you, <strong id="succ-name"></strong>! We will contact you on <strong id="succ-contact"></strong> within <strong>2 hours</strong> with your free written quote.</p>
+    <div class="quote-box" id="quoteBox3" style="display:none;margin-bottom:20px">
+      <div>
+        <div class="quote-label">Your Estimated Quote</div>
+        <div class="quote-amount" id="quoteAmount3">—</div>
+        <div class="quote-note">Written confirmation follows within 2 hours</div>
+      </div>
+      <div class="quote-icon">💰</div>
+    </div>
+    <div class="action-btns">
+      <a id="calLink" href="#" target="_blank" class="btn-cal">📅 Add Move to Google Calendar</a>
+      <a id="waLink" href="https://wa.me/2348000000000?text=Hello%20Mo%C3%A9%20Moves!%20I%20just%20submitted%20a%20booking%20request." target="_blank" class="btn-wa">💬 WhatsApp Us Now</a>
+    </div>
+    <div class="success-footer">
+      Follow us on Instagram: <a href="https://instagram.com/moemoves" target="_blank">@moemoves</a> · Ilorin, Kwara State · 2026
+    </div>
+  </div>
+
+</div><!-- /form-card -->
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <p>© 2026 Moé Moves · Stress-Free Relocation & Home Support Services</p>
+  <p>Ilorin, Kwara State, Nigeria · <a href="https://instagram.com/moemoves">@moemoves</a></p>
+  <p style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.2)">Serving Ilorin and nearby towns</p>
+</footer>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────
+let cur = 0;
+let pkgRange = null;
+let selectedPkg = '';
+const steps = ['p0','p1','p2','p3','p4'];
+const totalSteps = steps.length;
+
+// Set minimum date to today
+document.getElementById('movedate').min = new Date().toISOString().split('T')[0];
+
+// ── NAVIGATION ─────────────────────────────────────────────────────
+function goTo(n) {
+  if (n > cur && !validate(cur)) return;
+  document.getElementById(steps[cur]).classList.remove('active');
+  cur = n;
+  document.getElementById(steps[cur]).classList.add('active');
+  updateProgress();
+  if (cur === 4) buildSummary();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validate(step) {
+  if (step === 0) {
+    if (!v('name')) { alert('Please enter your full name.'); return false; }
+    if (!v('phone')) { alert('Please enter your phone number.'); return false; }
+  }
+  if (step === 1) {
+    if (!v('from')) { alert('Please enter your current address area.'); return false; }
+    if (!v('to')) { alert('Please enter your destination area.'); return false; }
+    if (!v('movedate')) { alert('Please select a preferred move date.'); return false; }
+  }
+  return true;
+}
+
+function v(id) { return document.getElementById(id).value.trim(); }
+
+// ── PROGRESS ───────────────────────────────────────────────────────
+function updateProgress() {
+  for (let i = 0; i < totalSteps; i++) {
+    const circle = document.getElementById('pc' + i);
+    const label = document.getElementById('pl' + i);
+    const line = document.getElementById('ln' + i);
+    circle.className = 'prog-circle' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    label.className = 'prog-label' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    circle.textContent = i < cur ? '✓' : i + 1;
+    if (line) line.className = 'prog-line' + (i < cur ? ' done' : '');
+  }
+}
+
+// ── PILLS ──────────────────────────────────────────────────────────
+function pickPill(groupId, el) {
+  document.querySelectorAll('#' + groupId + ' .pill').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function getPill(groupId) {
+  const el = document.querySelector('#' + groupId + ' .pill.on');
+  return el ? el.dataset.val : '';
+}
+
+// ── CHECKBOXES ─────────────────────────────────────────────────────
+function toggleChk(el) {
+  el.classList.toggle('on');
+  el.querySelector('.chk-box').textContent = el.classList.contains('on') ? '✓' : '';
+  updateQuote();
+}
+
+function getChecked(groupId) {
+  return Array.from(document.querySelectorAll('#' + groupId + ' .chk-item.on'))
+    .map(el => el.dataset.val);
+}
+
+// ── PACKAGES ───────────────────────────────────────────────────────
+function pickPkg(el, name, range) {
+  document.querySelectorAll('#g-pkg .pkg-card').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  selectedPkg = name;
+  pkgRange = range;
+  updateQuote();
+}
+
+// ── LIVE QUOTE CALCULATOR ──────────────────────────────────────────
+function updateQuote() {
+  if (!pkgRange || selectedPkg === 'Corporate') {
+    if (selectedPkg === 'Corporate') {
+      showQuote('quoteBox', 'quoteAmount', 'Custom Quote — we will assess and send you a tailored price');
+    }
+    return;
+  }
+  let low = pkgRange[0], high = pkgRange[1];
+
+  // Home size modifier
+  const size = document.getElementById('homesize').value;
+  if (size.includes('3 Bed')) { low *= 1.1; high *= 1.15; }
+  if (size.includes('4 Bed')) { low *= 1.18; high *= 1.22; }
+  if (size.includes('5 Bed')) { low *= 1.28; high *= 1.35; }
+  if (size.includes('Office')) { low *= 1.2; high *= 1.3; }
+
+  // Distance modifier
+  const dist = getPill('g-dist');
+  if (dist === 'Across Ilorin') { low += 8000; high += 15000; }
+  if (dist === 'Nearby town') { low += 20000; high += 40000; }
+
+  // Floor modifier
+  const floor = getPill('g-floor');
+  if (floor === '1st floor (stairs)') { low += 5000; high += 8000; }
+  if (floor === '2nd floor+') { low += 10000; high += 16000; }
+
+  // Heavy items
+  const heavyCount = getChecked('g-heavy').length;
+  low += heavyCount * 2000; high += heavyCount * 4000;
+
+  // Artisan add-ons
+  const artisans = ['Painting','Plumbing','Electrical','Furniture Assembly'];
+  const artCount = getChecked('g-services').filter(s => artisans.some(a => s.includes(a))).length;
+  low += artCount * 8000; high += artCount * 20000;
+
+  low = Math.round(low / 1000) * 1000;
+  high = Math.round(high / 1000) * 1000;
+
+  const label = '₦' + (low/1000) + 'k – ₦' + (high/1000) + 'k';
+  showQuote('quoteBox', 'quoteAmount', label);
+  showQuote('quoteBox2', 'quoteAmount2', label);
+  showQuote('quoteBox3', 'quoteAmount3', label);
+}
+
+function showQuote(boxId, amtId, label) {
+  const box = document.getElementById(boxId);
+  if (box) { box.style.display = 'flex'; document.getElementById(amtId).textContent = label; }
+}
+
+// ── PRICE LIST ACCORDION ───────────────────────────────────────────
+function toggleAcc() {
+  const body = document.getElementById('accBody');
+  const chev = document.getElementById('chevron');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+// ── SUMMARY ────────────────────────────────────────────────────────
+function buildSummary() {
+  set('s-name', v('name'));
+  set('s-phone', v('phone'));
+  set('s-wa', v('whatsapp') || 'Same as phone');
+  set('s-source', getPill('g-source') || '—');
+  set('s-type', getPill('g-movetype') || '—');
+  set('s-size', document.getElementById('homesize').value || '—');
+  set('s-from', v('from'));
+  set('s-to', v('to'));
+  set('s-dist', getPill('g-dist') || '—');
+  set('s-date', v('movedate'));
+  set('s-time', document.getElementById('movetime').value || '—');
+  set('s-svcs', getChecked('g-services').join(', ') || 'None selected');
+  set('s-heavy', getChecked('g-heavy').join(', ') || 'None');
+  set('s-pkg', selectedPkg || '—');
+  set('s-budget', getPill('g-budget') || '—');
+  updateQuote();
+}
+
+function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+// ── SUBMIT (NETLIFY FORMS) ─────────────────────────────────────────
+function submitForm() {
+  const data = {
+    'form-name': 'moemoves-booking',
+    'full-name': v('name'),
+    'phone': v('phone'),
+    'whatsapp': v('whatsapp') || v('phone'),
+    'email': v('email'),
+    'source': getPill('g-source'),
+    'move-type': getPill('g-movetype'),
+    'home-size': document.getElementById('homesize').value,
+    'move-from': v('from'),
+    'move-to': v('to'),
+    'distance': getPill('g-dist'),
+    'move-date': v('movedate'),
+    'move-time': document.getElementById('movetime').value,
+    'floor-level': getPill('g-floor'),
+    'services': getChecked('g-services').join(', '),
+    'heavy-items': getChecked('g-heavy').join(', '),
+    'fragile-items': v('fragile'),
+    'package': selectedPkg,
+    'budget': getPill('g-budget'),
+    'estimated-quote': document.getElementById('quoteAmount')?.textContent || '',
+    'notes': v('notes'),
+  };
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => showSuccess())
+  .catch(() => showSuccess()); // Show success even if offline (for demo)
+}
+
+function showSuccess() {
+  steps.forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('progressBar').style.display = 'none';
+  document.querySelector('.hero h1').innerHTML = 'Thank You! 🎉';
+  document.querySelector('.hero p').textContent = 'Your booking request has been received.';
+
+  const succ = document.getElementById('successPanel');
+  succ.style.display = 'block';
+
+  document.getElementById('succ-name').textContent = v('name');
+  document.getElementById('succ-contact').textContent = v('whatsapp') || v('phone');
+
+  // Calendar link
+  const d = v('movedate').replace(/-/g, '');
+  if (d) {
+    const title = encodeURIComponent('Moé Moves — ' + v('name') + "'s Move");
+    const details = encodeURIComponent('Moving from ' + v('from') + ' to ' + v('to') + '. Package: ' + selectedPkg);
+    const loc = encodeURIComponent(v('from') + ', Ilorin, Kwara State');
+    document.getElementById('calLink').href =
+      `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${d}/${d}&details=${details}&location=${loc}`;
+  }
+
+  // WhatsApp link — UPDATE THIS NUMBER
+  const msg = encodeURIComponent(`Hello Moé Moves! I just submitted a booking request. Name: ${v('name')}, Date: ${v('movedate')}, From: ${v('from')} to ${v('to')}. Package: ${selectedPkg}.`);
+  document.getElementById('waLink').href = `https://wa.me/2348000000000?text=${msg}`;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
